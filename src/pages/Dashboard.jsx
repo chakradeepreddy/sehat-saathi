@@ -467,7 +467,7 @@ const Dashboard = () => {
             <SectionHeader
               title={t('dash.recentRx')}
               icon={<FileText size={14} />}
-              action={{ label: t('dash.viewAll'), onClick: () => navigate('/prescriptions') }}
+              action={{ label: t('dash.viewAll'), onClick: () => navigate(ROUTES.PRESCRIPTIONS_LIST) }}
             />
             {recentPrescription ? (
               <Card

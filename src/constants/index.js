@@ -14,6 +14,7 @@ export const ROUTES = {
   AI_SYMPTOM_CHECKER:  '/ai-checker',
   VIDEO_CONSULTATION:  '/consultation/:appointmentId',
   PRESCRIPTION:        '/prescriptions/:id',
+  PRESCRIPTIONS_LIST:  '/prescriptions-list',
   PROFILE:             '/profile',
   MEDICINES:           '/medicines',
 }
