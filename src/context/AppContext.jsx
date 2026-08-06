@@ -24,8 +24,8 @@ const DEFAULT_USER = {
   allergies: ['Penicillin'],
   emergencyContact: { name: 'Ranjit Singh', relation: 'Husband', phone: '+91 87654 32109' },
   family: [
-    { id: 'u002', name: 'Daljit Singh', relation: 'Father-in-law', age: 68, bloodGroup: 'O+', abhaId: 'ABHA-9876-5432-1098' },
-    { id: 'u003', name: 'Aarav Singh', relation: 'Son', age: 4, bloodGroup: 'B+', abhaId: 'ABHA-4567-8901-2345' }
+    { id: 'u002', name: 'Daljit Singh', relation: 'Father-in-law', age: 68, bloodGroup: 'O+', abhaId: 'ABHA-9876-5432-1098', village: 'Barnala Road, Nabha', allergies: ['Dust'] },
+    { id: 'u003', name: 'Aarav Singh', relation: 'Son', age: 4, bloodGroup: 'B+', abhaId: 'ABHA-4567-8901-2345', village: 'Barnala Road, Nabha', allergies: ['None'] }
   ]
 }
 
@@ -70,7 +70,7 @@ const reducer = (state, action) => {
     case 'TOGGLE_LOW_BANDWIDTH_MODE':
       return { ...state, isLowBandwidthMode: !state.isLowBandwidthMode }
     case 'SET_ACTIVE_PROFILE':
-      return { ...state, activeProfileId: action.payload }
+      return { ...state, activeProfile: action.payload, activeProfileId: action.payload.id }
     case 'ADD_MEDICINE':
       return { ...state, medicines: [...state.medicines, action.payload] }
     case 'REMOVE_MEDICINE':
@@ -132,7 +132,7 @@ export const AppProvider = ({ children }) => {
 
   const toggleAshaMode = () => dispatch({ type: 'TOGGLE_ASHA_MODE' })
   const toggleLowBandwidthMode = () => dispatch({ type: 'TOGGLE_LOW_BANDWIDTH_MODE' })
-  const setActiveProfile = (profile) => dispatch({ type: 'SET_ACTIVE_PROFILE', payload: profile.id })
+  const setActiveProfile = (profile) => dispatch({ type: 'SET_ACTIVE_PROFILE', payload: profile })
   const addMedicine = (med) => dispatch({ type: 'ADD_MEDICINE', payload: med })
   const removeMedicine = (id) => dispatch({ type: 'REMOVE_MEDICINE', payload: id })
   const toggleMedicineStatus = (id) => dispatch({ type: 'TOGGLE_MEDICINE', payload: id })
