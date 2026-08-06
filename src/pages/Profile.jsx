@@ -220,7 +220,7 @@ const Profile = () => {
                 <div className="mt-6 flex items-center justify-between relative z-10">
                   <div className="text-left">
                     <p className="text-xs text-green-700/70 font-semibold mb-0.5">Name</p>
-                    <p className="text-sm font-bold text-green-900">{user?.name}</p>
+                    <p className="text-sm font-bold text-green-900">{activeProfile?.name}</p>
                   </div>
                   <div className="relative">
                     <div className="absolute -inset-1 bg-green-400 rounded-lg blur opacity-30 animate-pulse"></div>
