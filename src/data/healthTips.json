@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tip001",
+    "category": "Nutrition",
+    "title": "Iron-Rich Foods for Anemia Prevention",
+    "body": "Include spinach, lentils, jaggery, and sesame seeds in your daily diet. These are locally available in Nabha markets and help prevent iron deficiency.",
+    "icon": "Leaf",
+    "color": "green"
+  },
+  {
+    "id": "tip002",
+    "category": "Hygiene",
+    "title": "Hand Washing Saves Lives",
+    "body": "Wash hands with soap for at least 20 seconds before meals and after using the toilet. This simple habit prevents 80% of infectious diseases.",
+    "icon": "Droplets",
+    "color": "blue"
+  },
+  {
+    "id": "tip003",
+    "category": "Maternal Health",
+    "title": "Prenatal Check-ups Are Essential",
+    "body": "Pregnant women should visit PHC at least 4 times during pregnancy. Free check-ups and medicines are available at all Nabha PHCs under Janani Suraksha Yojana.",
+    "icon": "Heart",
+    "color": "pink"
+  },
+  {
+    "id": "tip004",
+    "category": "Diabetes",
+    "title": "Control Blood Sugar Naturally",
+    "body": "Walk for 30 minutes daily, reduce white rice and refined sugar intake. Regular blood sugar checks at PHC are free under NPCDCS programme.",
+    "icon": "Activity",
+    "color": "orange"
+  },
+  {
+    "id": "tip005",
+    "category": "Children",
+    "title": "Complete Your Child's Vaccination",
+    "body": "Ensure your child receives all vaccines as per the immunisation schedule. Free vaccines are available at all PHCs in Nabha. Missed vaccines can lead to serious diseases.",
+    "icon": "Shield",
+    "color": "purple"
+  }
+]

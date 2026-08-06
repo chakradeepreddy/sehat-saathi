@@ -1,0 +1,252 @@
+/* ─────────────────────────────────────────────
+   Sehat Saathi — Global Design System
+   Author: Sehat Saathi Engineering
+   ───────────────────────────────────────────── */
+
+/* Google Fonts — Inter */
+/* @import must come before @tailwindcss */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ── Motion & Easing ── */
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Brand Colors ── */
+  --color-brand-50:  #f0f9ff;
+  --color-brand-100: #e0f2fe;
+  --color-brand-200: #bae6fd;
+  --color-brand-300: #7dd3fc;
+  --color-brand-400: #38bdf8;
+  --color-brand-500: #0ea5e9;
+  --color-brand-600: #0284c7;
+  --color-brand-700: #0369a1;
+  --color-brand-800: #075985;
+  --color-brand-900: #0c4a6e;
+
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+
+  --color-success-50:  #ecfdf5;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+
+  --color-emergency-50:  #fef2f2;
+  --color-emergency-500: #ef4444;
+  --color-emergency-600: #dc2626;
+
+  --color-surface:    #f8fafc;
+  --color-card:       #ffffff;
+  --color-border:     #e2e8f0;
+  --color-muted:      #94a3b8;
+  --color-text:       #0f172a;
+  --color-text-soft:  #475569;
+
+  /* ── Typography ── */
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;
+
+  /* ── Border Radius ── */
+  --radius-card: 12px;
+  --radius-btn:  8px;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-glow:  0 0 24px rgba(14, 165, 233, 0.15);
+  --shadow-inner-btn: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ── Base Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ── Utility: Glassmorphism card ── */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ── Utility: Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Utility: Brand gradient background ── */
+.bg-brand-gradient {
+  background: #0f172a;
+}
+
+/* ── Utility: Soft blue background ── */
+.bg-brand-soft {
+  background: #f8fafc;
+}
+
+/* ── Animation: Fade in up ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s var(--ease-apple) both;
+}
+
+/* ── Animation: Pulse glow ── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(14, 165, 233, 0); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ── Animation: Ripple Out ── */
+@keyframes rippleOut {
+  0%   { transform: scale(0.8); opacity: 0; }
+  30%  { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ── Animation: Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Animation: Heartbeat ── */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%       { transform: scale(1.12); }
+  30%       { transform: scale(1); }
+  45%       { transform: scale(1.06); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+
+/* ── Animation: Breathing (skeleton loading) ── */
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+.animate-shimmer {
+  background: #e2e8f0;
+  animation: breathe 1.5s ease-in-out infinite;
+}
+
+/* ── Animation: Slide in from right ── */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s var(--ease-apple) both;
+}
+
+/* ── Page transition: stagger children ── */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1)  { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2)  { animation-delay: 0.10s; }
+.stagger-children > *:nth-child(3)  { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4)  { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(5)  { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6)  { animation-delay: 0.30s; }
+.stagger-children > *:nth-child(7)  { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8)  { animation-delay: 0.40s; }
+
+/* ── AI Chat bubbles ── */
+.chat-bubble-user {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: white;
+  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+}
+
+.chat-bubble-ai {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+}
+
+/* ── Emergency pulse ── */
+@keyframes emergencyPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+
+.animate-emergency {
+  animation: emergencyPulse 1.2s ease-in-out infinite;
+}
+
+/* ── Focus ring ── */
+*:focus-visible {
+  outline: 2px solid #0f172a;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Premium Iconography (Linear style) ── */
+svg.lucide {
+  stroke-width: 1.5 !important;
+}

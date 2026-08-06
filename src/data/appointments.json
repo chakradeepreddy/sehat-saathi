@@ -1,0 +1,31 @@
+[
+  {
+    "id": "apt001",
+    "doctorId": "d001",
+    "doctorName": "Dr. Harpreet Singh",
+    "specialization": "General Physician",
+    "date": "2026-08-08",
+    "displayDate": "Tomorrow",
+    "time": "11:00 AM",
+    "type": "video",
+    "status": "upcoming",
+    "fee": 300,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=harpreet&backgroundColor=b6e3f4",
+    "meetingId": "ss-apt001-meet"
+  },
+  {
+    "id": "apt002",
+    "doctorId": "d002",
+    "doctorName": "Dr. Priya Sharma",
+    "specialization": "Gynecologist",
+    "date": "2026-08-05",
+    "displayDate": "3 days ago",
+    "time": "02:00 PM",
+    "type": "video",
+    "status": "completed",
+    "fee": 500,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=priya&backgroundColor=ffd5dc",
+    "meetingId": "ss-apt002-meet",
+    "prescriptionId": "rx001"
+  }
+]

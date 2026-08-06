@@ -1,0 +1,94 @@
+[
+  {
+    "id": "rx001",
+    "appointmentId": "apt002",
+    "doctorId": "d002",
+    "doctorName": "Dr. Priya Sharma",
+    "doctorSpecialization": "Gynecologist",
+    "doctorQualification": "MBBS, MS (Obstetrics & Gynecology)",
+    "clinic": "Nabha Women & Child Clinic",
+    "patientName": "Simran Kaur",
+    "patientAge": 28,
+    "patientGender": "Female",
+    "date": "2026-08-05",
+    "diagnosis": "Iron Deficiency Anemia — Mild",
+    "medicines": [
+      {
+        "name": "Ferrous Sulfate 200mg",
+        "dosage": "1 tablet",
+        "frequency": "Twice daily",
+        "duration": "30 days",
+        "instructions": "Take after meals with orange juice or Vitamin C"
+      },
+      {
+        "name": "Folic Acid 5mg",
+        "dosage": "1 tablet",
+        "frequency": "Once daily",
+        "duration": "30 days",
+        "instructions": "Take in the morning after breakfast"
+      },
+      {
+        "name": "Vitamin B12 (Methylcobalamin) 500mcg",
+        "dosage": "1 tablet",
+        "frequency": "Once daily",
+        "duration": "30 days",
+        "instructions": "Take with meals"
+      }
+    ],
+    "advice": [
+      "Increase intake of iron-rich foods: green leafy vegetables, lentils, jaggery",
+      "Avoid tea and coffee within 1 hour of taking iron tablets",
+      "Follow up blood test after 30 days",
+      "Get adequate rest and avoid strenuous activity"
+    ],
+    "followUp": "2026-09-05",
+    "signature": "Dr. Priya Sharma",
+    "registrationNo": "PMC/2015/04892"
+  },
+  {
+    "id": "rx002",
+    "appointmentId": "apt003",
+    "doctorId": "d001",
+    "doctorName": "Dr. Anil Kumar",
+    "doctorSpecialization": "General Physician",
+    "doctorQualification": "MBBS, MD (General Medicine)",
+    "clinic": "Sanjeevani Clinic, Nabha",
+    "patientName": "Simran Kaur",
+    "patientAge": 28,
+    "patientGender": "Female",
+    "date": "2026-07-15",
+    "diagnosis": "Viral Fever & Upper Respiratory Tract Infection",
+    "medicines": [
+      {
+        "name": "Paracetamol 650mg",
+        "dosage": "1 tablet",
+        "frequency": "Thrice daily (if fever > 100°F)",
+        "duration": "5 days",
+        "instructions": "Take after meals"
+      },
+      {
+        "name": "Levocetirizine 5mg",
+        "dosage": "1 tablet",
+        "frequency": "Once daily",
+        "duration": "5 days",
+        "instructions": "Take at night before sleeping"
+      },
+      {
+        "name": "Azithromycin 500mg",
+        "dosage": "1 tablet",
+        "frequency": "Once daily",
+        "duration": "3 days",
+        "instructions": "Take after lunch"
+      }
+    ],
+    "advice": [
+      "Drink plenty of warm fluids",
+      "Gargle with warm salt water twice daily",
+      "Rest for at least 3-4 days",
+      "Monitor temperature every 6 hours"
+    ],
+    "followUp": "2026-07-20",
+    "signature": "Dr. Anil Kumar",
+    "registrationNo": "PMC/2011/02134"
+  }
+]

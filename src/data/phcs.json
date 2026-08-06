@@ -1,0 +1,98 @@
+[
+  {
+    "id": "phc000",
+    "name": "Pradhan Mantri Jan Aushadhi Kendra",
+    "address": "Near Main Bus Stand, Nabha",
+    "distance": "1.2 km",
+    "timing": "9:00 AM - 8:00 PM",
+    "open": true,
+    "phone": "1800-180-8080",
+    "services": [
+      "Generic Medicines",
+      "50-90% Discount",
+      "Sanitary Pads"
+    ],
+    "isJanAushadhi": true
+  },
+  {
+    "id": "phc001",
+    "name": "PHC Nabha Urban",
+    "type": "Primary Health Centre",
+    "address": "Civil Lines, Nabha, Punjab 147201",
+    "distance": "1.2 km",
+    "phone": "01765-220134",
+    "timing": "8:00 AM – 2:00 PM (Mon–Sat)",
+    "services": [
+      "OPD",
+      "Vaccination",
+      "Maternal Health",
+      "Pathology"
+    ],
+    "open": true,
+    "coordinates": {
+      "lat": 30.376,
+      "lng": 76.143
+    }
+  },
+  {
+    "id": "phc002",
+    "name": "PHC Barnala Road",
+    "type": "Primary Health Centre",
+    "address": "Barnala Road, Nabha, Punjab 147201",
+    "distance": "3.5 km",
+    "phone": "01765-221078",
+    "timing": "8:00 AM – 2:00 PM (Mon–Sat)",
+    "services": [
+      "OPD",
+      "Family Planning",
+      "Child Health",
+      "Immunisation"
+    ],
+    "open": true,
+    "coordinates": {
+      "lat": 30.369,
+      "lng": 76.138
+    }
+  },
+  {
+    "id": "phc003",
+    "name": "Community Health Centre Nabha",
+    "type": "Community Health Centre",
+    "address": "Hospital Road, Nabha, Punjab 147201",
+    "distance": "0.8 km",
+    "phone": "01765-220100",
+    "timing": "24 Hours (Emergency)",
+    "services": [
+      "Emergency",
+      "Surgery",
+      "Labour Room",
+      "Blood Bank",
+      "ICU"
+    ],
+    "open": true,
+    "coordinates": {
+      "lat": 30.375,
+      "lng": 76.146
+    }
+  },
+  {
+    "id": "phc004",
+    "name": "PHC Sarhind Road",
+    "type": "Primary Health Centre",
+    "address": "Sarhind Road, Nabha, Punjab 147201",
+    "distance": "4.8 km",
+    "phone": "01765-222045",
+    "timing": "8:00 AM – 2:00 PM (Mon–Sat)",
+    "services": [
+      "OPD",
+      "Vaccination",
+      "TB Programme",
+      "Malaria Control"
+    ],
+    "open": false,
+    "coordinates": {
+      "lat": 30.372,
+      "lng": 76.151
+    }
+  }
+]
