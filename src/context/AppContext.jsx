@@ -24,8 +24,8 @@ const DEFAULT_USER = {
   allergies: ['Penicillin'],
   emergencyContact: { name: 'Ranjit Singh', relation: 'Husband', phone: '+91 87654 32109' },
   family: [
-    { id: 'u002', name: 'Daljit Singh', relation: 'Father-in-law', age: 68, bloodGroup: 'O+', abhaId: 'ABHA-9876-5432-1098', village: 'Barnala Road, Nabha', allergies: ['Dust'] },
-    { id: 'u003', name: 'Aarav Singh', relation: 'Son', age: 4, bloodGroup: 'B+', abhaId: 'ABHA-4567-8901-2345', village: 'Barnala Road, Nabha', allergies: ['None'] }
+    { id: 'u002', name: 'Daljit Singh', relation: 'Father-in-law', age: 68, gender: 'Male', phone: '+91 87654 32109', bloodGroup: 'O+', abhaId: 'ABHA-9876-5432-1098', village: 'Barnala Road, Nabha', allergies: ['Dust'], avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=daljit&backgroundColor=b6e3f4' },
+    { id: 'u003', name: 'Aarav Singh', relation: 'Son', age: 4, gender: 'Male', phone: '+91 98765 43210', bloodGroup: 'B+', abhaId: 'ABHA-4567-8901-2345', village: 'Barnala Road, Nabha', allergies: ['None'], avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=aarav&backgroundColor=c0aede' }
   ]
 }
 

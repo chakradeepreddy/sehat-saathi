@@ -3,7 +3,7 @@
 // User profile and settings page.
 // ─────────────────────────────────────────────────────────────
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TopBar, PageWrapper } from '@/components/layout'
 import { Card, Avatar, Button, Modal } from '@/components/ui'
 import { LanguageSwitcher } from '@/components/shared'
@@ -11,12 +11,18 @@ import { useApp } from '@/context/AppContext'
 import { Settings, FileText, Bell, HelpCircle, LogOut, ChevronRight, Activity, ShieldCheck, File, Download, QrCode, Share2, WifiOff, AlertCircle } from 'lucide-react'
 
 const Profile = () => {
-  const { user, logout } = useApp()
+  const { activeProfile, logout } = useApp()
   const [showMedicalRecords, setShowMedicalRecords] = useState(false)
   const [showABHA, setShowABHA] = useState(false)
   const [dataSaver, setDataSaver] = useState(false)
-  const [abhaId, setAbhaId] = useState(user?.abhaId || 'Unlinked')
-  const [abhaStep, setAbhaStep] = useState(user?.abhaId && user.abhaId !== 'Unlinked' ? 'linked' : 'link')
+  const [abhaId, setAbhaId] = useState(activeProfile?.abhaId || 'Unlinked')
+  const [abhaStep, setAbhaStep] = useState(activeProfile?.abhaId && activeProfile.abhaId !== 'Unlinked' ? 'linked' : 'link')
+
+  // Sync state when profile changes
+  useEffect(() => {
+    setAbhaId(activeProfile?.abhaId || 'Unlinked')
+    setAbhaStep(activeProfile?.abhaId && activeProfile.abhaId !== 'Unlinked' ? 'linked' : 'link')
+  }, [activeProfile?.id, activeProfile?.abhaId])
 
   const SETTING_GROUPS = [
     {
@@ -62,10 +68,10 @@ const Profile = () => {
           
           {/* Profile Header */}
           <div className="flex items-center gap-4">
-            <Avatar src={user.avatar} name={user.name} size="xl" className="ring-4 ring-white shadow-sm" />
+            <Avatar src={activeProfile?.avatar} name={activeProfile?.name} size="xl" className="ring-4 ring-white shadow-sm" />
             <div className="flex-1">
-              <h2 className="text-xl font-display font-bold text-[var(--color-text)]">{user.name}</h2>
-              <p className="text-sm text-[var(--color-text-soft)] mt-0.5">{user.phone}</p>
+              <h2 className="text-xl font-display font-bold text-[var(--color-text)]">{activeProfile?.name}</h2>
+              <p className="text-sm text-[var(--color-text-soft)] mt-0.5">{activeProfile?.phone}</p>
               <div className={`mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${abhaId !== 'Unlinked' ? 'bg-green-50 text-green-700 border-green-100' : 'bg-orange-50 text-orange-700 border-orange-100'}`}>
                 {abhaId !== 'Unlinked' ? <ShieldCheck size={12} /> : <AlertCircle size={12} />}
                 {abhaId !== 'Unlinked' ? 'ABHA Linked' : 'Link ABHA'}
@@ -76,9 +82,9 @@ const Profile = () => {
           {/* Quick Stats */}
           <div className="grid grid-cols-3 gap-3">
             {[
-              { label: 'Age', value: `${user.age} yrs` },
-              { label: 'Blood', value: user.bloodGroup },
-              { label: 'Gender', value: user.gender },
+              { label: 'Age', value: `${activeProfile?.age || '--'} yrs` },
+              { label: 'Blood', value: activeProfile?.bloodGroup || '--' },
+              { label: 'Gender', value: activeProfile?.gender || '--' },
             ].map((stat) => (
               <div key={stat.label} className="bg-[var(--color-surface-2)] p-3 rounded-2xl text-center border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-muted)]">{stat.label}</p>
