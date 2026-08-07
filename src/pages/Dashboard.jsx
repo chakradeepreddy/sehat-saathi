@@ -328,9 +328,9 @@ const Dashboard = () => {
                 (() => {
                   const nextMed = MEDICINES.filter(m => !m.taken)[0]
                   return (
-                    <div className="bg-orange-50 border border-orange-100 rounded-2xl p-4 flex items-center justify-between">
-                       <div className="flex items-center gap-3">
-                         <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
+                    <div className="bg-orange-50 border border-orange-100 rounded-2xl p-4 flex items-center justify-between gap-2">
+                       <div className="flex items-center gap-3 min-w-0 flex-1">
+                         <div className="w-10 h-10 shrink-0 bg-white rounded-full flex items-center justify-center shadow-sm">
                            <Pill size={18} className="text-orange-500" />
                          </div>
                          <div className="min-w-0 pr-2">
@@ -345,9 +345,9 @@ const Dashboard = () => {
                   )
                 })()
               ) : (
-                <div className="bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-4 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                <div className="bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-4 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <div className="w-10 h-10 shrink-0 bg-slate-100 rounded-full flex items-center justify-center">
                       <Pill size={18} className="text-slate-400" />
                     </div>
                     <div>
