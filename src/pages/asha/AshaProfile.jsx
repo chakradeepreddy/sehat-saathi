@@ -1,8 +1,19 @@
+import { useNavigate } from 'react-router-dom'
 import { PageWrapper, TopBar } from '@/components/layout'
 import { useApp } from '@/context/AppContext'
+import { useRole } from '@/context/RoleContext'
+import { ROUTES } from '@/constants'
 
 const AshaProfile = () => {
   const { user, logout } = useApp()
+  const { setRole } = useRole()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    setRole(null)
+    logout()
+    navigate(ROUTES.ROLE_SELECTION, { replace: true })
+  }
 
   return (
     <PageWrapper>
@@ -20,11 +31,7 @@ const AshaProfile = () => {
         </div>
 
         <button 
-          onClick={() => {
-            logout();
-            localStorage.removeItem('ss_role');
-            window.location.href = '/';
-          }}
+          onClick={handleLogout}
           className="w-full mt-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3.5 rounded-xl transition-colors"
         >
           Sign Out

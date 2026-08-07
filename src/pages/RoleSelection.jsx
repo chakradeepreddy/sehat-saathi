@@ -1,18 +1,22 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card } from '@/components/ui'
+import { Card, Logo } from '@/components/ui'
 import { User, Stethoscope } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { ROUTES } from '@/constants'
 import { useRole } from '@/context/RoleContext'
-import { Logo } from '@/components/ui'
 
 const RoleSelection = () => {
   const navigate = useNavigate()
   const { setRole } = useRole()
+  const [transitionRole, setTransitionRole] = useState(null)
 
   const handleRoleSelect = (role) => {
-    setRole(role)
-    navigate(ROUTES.LOGIN)
+    setTransitionRole(role)
+    setTimeout(() => {
+      setRole(role)
+      navigate(ROUTES.LOGIN)
+    }, 1200) // 1.2s to allow for fade out, logo display, and fade in
   }
 
   return (
@@ -28,7 +32,31 @@ const RoleSelection = () => {
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-300/20 rounded-full blur-3xl -z-10" />
       <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-200/20 rounded-full blur-2xl -z-10" />
 
-      <div className="w-full max-w-sm text-center mb-8 relative z-10 pt-10 animate-fade-in-up">
+      {/* TRANSITION OVERLAY */}
+      <div 
+        className={`absolute inset-0 z-50 flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
+          transitionRole ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{ background: 'linear-gradient(145deg, #0c4a6e 0%, #0284c7 55%, #0ea5e9 100%)' }}
+      >
+        <div className={`flex flex-col items-center transition-all duration-700 delay-150 ${transitionRole ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
+          <div 
+            className="w-24 h-24 rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 shadow-2xl animate-pulse"
+            style={{
+              background: 'rgba(255,255,255,0.18)',
+              backdropFilter: 'blur(16px)',
+              border: '1.5px solid rgba(255,255,255,0.3)',
+            }}
+          >
+            <Logo size="xl" variant="white" showText={false} iconOnly />
+          </div>
+          <p className="text-white font-display font-medium text-lg tracking-wide text-center px-6">
+            {transitionRole === 'CITIZEN' ? 'Preparing your Citizen Workspace...' : 'Loading ASHA Operations Dashboard...'}
+          </p>
+        </div>
+      </div>
+
+      <div className={`w-full max-w-sm text-center mb-8 relative z-10 pt-10 transition-all duration-500 ${transitionRole ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-fade-in-up'}`}>
         <div 
           className="w-20 h-20 rounded-[1.5rem] flex items-center justify-center mx-auto mb-4 shadow-2xl"
           style={{
@@ -47,7 +75,7 @@ const RoleSelection = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-md flex flex-col gap-4 animate-fade-in-up relative z-10">
+      <div className={`w-full max-w-md flex flex-col gap-4 relative z-10 transition-all duration-500 delay-75 ${transitionRole ? 'opacity-0 scale-95 translate-y-4' : 'opacity-100 scale-100 animate-fade-in-up translate-y-0'}`}>
         {/* CITIZEN CARD */}
         <button 
           onClick={() => handleRoleSelect('CITIZEN')}

@@ -15,7 +15,13 @@ const Sidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { logout } = useApp()
-  const { isAsha } = useRole()
+  const { isAsha, setRole } = useRole()
+
+  const handleLogout = () => {
+    setRole(null)
+    logout()
+    navigate(ROUTES.ROLE_SELECTION, { replace: true })
+  }
 
   const SIDEBAR_ITEMS = isAsha ? [
     {
@@ -161,7 +167,7 @@ const Sidebar = () => {
       {/* Bottom Area */}
       <div className="p-4 border-t border-[var(--color-border)]">
         <button
-          onClick={logout}
+          onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2.5 w-full text-left text-red-600 hover:bg-red-50 rounded-xl transition-colors font-semibold"
         >
           <div className="w-8 h-8 flex items-center justify-center">

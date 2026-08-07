@@ -4,19 +4,31 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TopBar, PageWrapper } from '@/components/layout'
 import { Card, Avatar, Button, Modal } from '@/components/ui'
 import { LanguageSwitcher } from '@/components/shared'
 import { useApp } from '@/context/AppContext'
+import { useRole } from '@/context/RoleContext'
+import { ROUTES } from '@/constants'
 import { Settings, FileText, Bell, HelpCircle, LogOut, ChevronRight, Activity, ShieldCheck, File, Download, QrCode, Share2, WifiOff, AlertCircle } from 'lucide-react'
 
 const Profile = () => {
   const { activeProfile, logout } = useApp()
+  const { setRole } = useRole()
+  const navigate = useNavigate()
+
   const [showMedicalRecords, setShowMedicalRecords] = useState(false)
   const [showABHA, setShowABHA] = useState(false)
   const [dataSaver, setDataSaver] = useState(false)
   const [abhaId, setAbhaId] = useState(activeProfile?.abhaId || 'Unlinked')
   const [abhaStep, setAbhaStep] = useState(activeProfile?.abhaId && activeProfile.abhaId !== 'Unlinked' ? 'linked' : 'link')
+
+  const handleLogout = () => {
+    setRole(null)
+    logout()
+    navigate(ROUTES.ROLE_SELECTION, { replace: true })
+  }
 
   // Sync state when profile changes
   useEffect(() => {
@@ -136,11 +148,7 @@ const Profile = () => {
               variant="outline" 
               fullWidth 
               size="lg" 
-              onClick={() => {
-                logout();
-                localStorage.removeItem('ss_role');
-                window.location.href = '/';
-              }}
+              onClick={handleLogout}
               className="text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
             >
               <LogOut size={18} className="mr-2" />

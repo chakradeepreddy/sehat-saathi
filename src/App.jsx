@@ -46,7 +46,7 @@ const PlaceholderPage = ({ name }) => (
 // ── Protected Route ───────────────────────────────────────────────────────────
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useApp()
-  if (!isAuthenticated) return <Navigate to={ROUTES.LOGIN} replace />
+  if (!isAuthenticated) return <Navigate to={ROUTES.ROLE_SELECTION} replace />
   return children
 }
 
