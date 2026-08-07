@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Ramesh Kumar",
+    "age": 45,
+    "gender": "Male",
+    "bloodGroup": "O+",
+    "riskLevel": "High",
+    "conditions": ["Hypertension", "Diabetes Type 2"],
+    "lastVisit": "2024-03-10",
+    "nextVisit": "2024-03-24",
+    "phone": "+91 98765 43210"
+  },
+  {
+    "id": "2",
+    "name": "Sunita Devi",
+    "age": 28,
+    "gender": "Female",
+    "bloodGroup": "B+",
+    "riskLevel": "Medium",
+    "conditions": ["Pregnancy (3rd Trimester)", "Mild Anemia"],
+    "lastVisit": "2024-03-15",
+    "nextVisit": "2024-03-30",
+    "phone": "+91 98765 43211"
+  },
+  {
+    "id": "3",
+    "name": "Suresh Singh",
+    "age": 62,
+    "gender": "Male",
+    "bloodGroup": "A-",
+    "riskLevel": "High",
+    "conditions": ["Heart Disease", "Arthritis"],
+    "lastVisit": "2024-03-05",
+    "nextVisit": "2024-03-20",
+    "phone": "+91 98765 43212"
+  },
+  {
+    "id": "4",
+    "name": "Kavita Sharma",
+    "age": 35,
+    "gender": "Female",
+    "bloodGroup": "AB+",
+    "riskLevel": "Low",
+    "conditions": ["General Checkup"],
+    "lastVisit": "2024-02-28",
+    "nextVisit": "2024-05-28",
+    "phone": "+91 98765 43213"
+  }
+]

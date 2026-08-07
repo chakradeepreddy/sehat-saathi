@@ -1,0 +1,37 @@
+{
+  "totalVillagers": 485,
+  "highRiskPatients": 12,
+  "pendingVisits": 8,
+  "todayVisits": [
+    {
+      "id": "v1",
+      "name": "Ramesh Kumar",
+      "time": "10:30 AM",
+      "type": "Follow-up",
+      "condition": "Hypertension"
+    },
+    {
+      "id": "v2",
+      "name": "Sunita Devi",
+      "time": "02:15 PM",
+      "type": "Pregnancy Check",
+      "condition": "3rd Trimester"
+    }
+  ],
+  "recentAlerts": [
+    {
+      "id": "a1",
+      "type": "critical",
+      "message": "Suresh Singh reported severe chest pain in last symptom check.",
+      "time": "10 mins ago"
+    },
+    {
+      "id": "a2",
+      "type": "warning",
+      "message": "3 villagers missed their scheduled TB medication.",
+      "time": "2 hours ago"
+    }
+  ],
+  "monthlyTarget": 50,
+  "completedVisits": 38
+}

@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants'
 import { useApp } from '@/context/AppContext'
 import { Navbar, Sidebar } from '@/components/layout'
 import SplashScreen from '@/pages/SplashScreen'
+import RoleSelection from '@/pages/RoleSelection'
 import Login from '@/pages/Login'
 import Dashboard from '@/pages/Dashboard'
 import DoctorDirectory from '@/pages/DoctorDirectory'
@@ -19,6 +20,14 @@ import Prescription from '@/pages/Prescription'
 import PrescriptionsList from '@/pages/PrescriptionsList'
 import Profile from '@/pages/Profile'
 import Medicines from '@/pages/Medicines'
+
+// ASHA Pages
+import AshaDashboard from '@/pages/asha/AshaDashboard'
+import VillagerManagement from '@/pages/asha/VillagerManagement'
+import VillagerProfile from '@/pages/asha/VillagerProfile'
+import AshaVisits from '@/pages/asha/Visits'
+import AshaReports from '@/pages/asha/Reports'
+import AshaProfile from '@/pages/asha/AshaProfile'
 
 // Pages — will be replaced with real implementations
 const PlaceholderPage = ({ name }) => (
@@ -48,6 +57,7 @@ const App = () => {
       <Routes>
         {/* Public routes */}
         <Route path={ROUTES.SPLASH} element={<SplashScreen />} />
+        <Route path={ROUTES.ROLE_SELECTION} element={<RoleSelection />} />
         <Route path={ROUTES.LOGIN}  element={<Login />} />
 
         {/* Protected routes */}
@@ -83,6 +93,29 @@ const App = () => {
         } />
         <Route path={ROUTES.MEDICINES} element={
           <ProtectedRoute><Medicines /></ProtectedRoute>
+        } />
+
+        {/* ASHA Protected routes */}
+        <Route path={ROUTES.ASHA_DASHBOARD} element={
+          <ProtectedRoute><AshaDashboard /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.ASHA_VILLAGERS} element={
+          <ProtectedRoute><VillagerManagement /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.ASHA_VILLAGER_PROFILE} element={
+          <ProtectedRoute><VillagerProfile /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.ASHA_VISITS} element={
+          <ProtectedRoute><AshaVisits /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.ASHA_REPORTS} element={
+          <ProtectedRoute><AshaReports /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.ASHA_INSIGHTS} element={
+          <ProtectedRoute><AISymptomChecker /></ProtectedRoute> // Reuse AI Checker for ASHA
+        } />
+        <Route path={ROUTES.ASHA_PROFILE} element={
+          <ProtectedRoute><AshaProfile /></ProtectedRoute>
         } />
 
         {/* Fallback */}

@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '@/context/AppContext'
+import { useRole } from '@/context/RoleContext'
 import { ROUTES, APP_TAGLINE } from '@/constants'
 import { Logo } from '@/components/ui'
 
@@ -22,6 +23,7 @@ const FloatingOrb = ({ className, delay = '0s' }) => (
 const SplashScreen = () => {
   const navigate = useNavigate()
   const { isAuthenticated } = useApp()
+  const { role, isAsha } = useRole()
   const [phase, setPhase] = useState(0)
   // phase 0 = logo animating in
   // phase 1 = tagline appears
@@ -34,11 +36,15 @@ const SplashScreen = () => {
       setTimeout(() => setPhase(2), 1200),  // Features appear
       setTimeout(() => setPhase(3), 2000),  // Start exit
       setTimeout(() => {
-        navigate(isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN, { replace: true })
+        if (isAuthenticated && role) {
+          navigate(isAsha ? ROUTES.ASHA_DASHBOARD : ROUTES.DASHBOARD, { replace: true })
+        } else {
+          navigate(ROUTES.ROLE_SELECTION, { replace: true })
+        }
       }, 2500),
     ]
     return () => timers.forEach(clearTimeout)
-  }, [navigate, isAuthenticated])
+  }, [navigate, isAuthenticated, role, isAsha])
 
   return (
     <div

@@ -6,7 +6,10 @@
 
 export const ROUTES = {
   SPLASH:              '/',
+  ROLE_SELECTION:      '/role',
   LOGIN:               '/login',
+  
+  // Citizen Routes
   DASHBOARD:           '/dashboard',
   DOCTOR_DIRECTORY:    '/doctors',
   DOCTOR_PROFILE:      '/doctors/:id',
@@ -17,6 +20,15 @@ export const ROUTES = {
   PRESCRIPTIONS_LIST:  '/prescriptions-list',
   PROFILE:             '/profile',
   MEDICINES:           '/medicines',
+
+  // ASHA Routes
+  ASHA_DASHBOARD:      '/asha/dashboard',
+  ASHA_VILLAGERS:      '/asha/villagers',
+  ASHA_VILLAGER_PROFILE:'/asha/villagers/:id',
+  ASHA_VISITS:         '/asha/visits',
+  ASHA_REPORTS:        '/asha/reports',
+  ASHA_INSIGHTS:       '/asha/insights',
+  ASHA_PROFILE:        '/asha/profile',
 }
 
 export const APP_NAME = 'Sehat Saathi'

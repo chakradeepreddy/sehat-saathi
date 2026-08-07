@@ -9,13 +9,14 @@
 // OTP is simulated with a 1.5s fake delay — realistic demo experience.
 // ─────────────────────────────────────────────────────────────
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Shield, ChevronRight, CheckCircle2,
   Heart, Stethoscope, Bot, Video, Sparkles, ShieldCheck
 } from 'lucide-react'
 import { useApp } from '@/context/AppContext'
+import { useRole } from '@/context/RoleContext'
 import { ROUTES, APP_TAGLINE } from '@/constants'
 import { Button, Logo } from '@/components/ui'
 
@@ -84,6 +85,14 @@ const OTPInput = ({ value, onChange }) => {
 const Login = () => {
   const navigate = useNavigate()
   const { login } = useApp()
+  const { isAsha, role } = useRole()
+
+  // Redirect to role selection if no role is chosen
+  useEffect(() => {
+    if (!role) {
+      navigate(ROUTES.ROLE_SELECTION, { replace: true })
+    }
+  }, [role, navigate])
 
   const [step, setStep]           = useState('phone')  // 'phone' | 'otp' | 'success'
   const [phone, setPhone]         = useState('')
@@ -120,7 +129,7 @@ const Login = () => {
 
     // Mock login — passes default user
     login()
-    navigate(ROUTES.DASHBOARD, { replace: true })
+    navigate(isAsha ? ROUTES.ASHA_DASHBOARD : ROUTES.DASHBOARD, { replace: true })
   }
 
   const handlePhoneChange = (e) => {
@@ -221,10 +230,10 @@ const Login = () => {
           <div className="animate-fade-in-up">
             <div className="mb-7 mt-2">
               <h2 className="text-xl font-display font-bold text-[var(--color-text)]">
-                Sign in to continue
+                {isAsha ? 'Welcome Back, ASHA Worker' : 'Welcome Back'}
               </h2>
               <p className="text-sm text-[var(--color-text-soft)] mt-1">
-                Enter your mobile number to receive a verification code
+                {isAsha ? 'Manage and monitor your assigned community.' : 'Access your healthcare services.'}
               </p>
             </div>
 

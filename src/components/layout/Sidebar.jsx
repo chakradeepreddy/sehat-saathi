@@ -5,71 +5,117 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Home, Search, Bot, Video, FileText, User, LogOut, Pill } from 'lucide-react'
+import { Home, Search, Bot, Video, FileText, User, LogOut, Pill, Users, Activity, BarChart2 } from 'lucide-react'
 import { ROUTES } from '@/constants'
 import { Logo } from '@/components/ui'
 import { useApp } from '@/context/AppContext'
-
-const SIDEBAR_ITEMS = [
-  {
-    id: 'home',
-    label: 'Dashboard',
-    icon: Home,
-    route: ROUTES.DASHBOARD,
-    match: (path) => path === ROUTES.DASHBOARD,
-  },
-  {
-    id: 'consultations',
-    label: 'Consultations',
-    icon: Video,
-    route: '/consultations-list', // Need to define this route
-    match: (path) => path.startsWith('/consultations-list') || path.startsWith('/consultation/'),
-  },
-  {
-    id: 'prescriptions',
-    label: 'Prescriptions',
-    icon: FileText,
-    route: '/prescriptions-list', // Need to define this route
-    match: (path) => path.startsWith('/prescriptions-list') || path.startsWith('/prescription'),
-  },
-  {
-    id: 'doctors',
-    label: 'Find a Doctor',
-    icon: Search,
-    route: ROUTES.DOCTOR_DIRECTORY,
-    match: (path) => path.startsWith('/doctors'),
-  },
-  {
-    id: 'ai',
-    label: 'AI Symptom Checker',
-    icon: Bot,
-    route: ROUTES.AI_SYMPTOM_CHECKER,
-    match: (path) => path === ROUTES.AI_SYMPTOM_CHECKER,
-    highlight: true,
-  },
-  {
-    id: 'medicines',
-    label: 'Medicines',
-    icon: Pill,
-    route: ROUTES.MEDICINES,
-    match: (path) => path === ROUTES.MEDICINES,
-  },
-  {
-    id: 'profile',
-    label: 'My Profile',
-    icon: User,
-    route: ROUTES.PROFILE,
-    match: (path) => path === ROUTES.PROFILE,
-  },
-]
+import { useRole } from '@/context/RoleContext'
 
 const Sidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { logout } = useApp()
+  const { isAsha } = useRole()
 
-  // Pages where we might not want the sidebar even on desktop (like splash/login)
-  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN]
+  const SIDEBAR_ITEMS = isAsha ? [
+    {
+      id: 'home',
+      label: 'Dashboard',
+      icon: Home,
+      route: ROUTES.ASHA_DASHBOARD,
+      match: (path) => path === ROUTES.ASHA_DASHBOARD,
+    },
+    {
+      id: 'villagers',
+      label: 'Villagers',
+      icon: Users,
+      route: ROUTES.ASHA_VILLAGERS,
+      match: (path) => path.startsWith(ROUTES.ASHA_VILLAGERS),
+    },
+    {
+      id: 'visits',
+      label: 'Visits',
+      icon: Activity,
+      route: ROUTES.ASHA_VISITS,
+      match: (path) => path.startsWith(ROUTES.ASHA_VISITS),
+    },
+    {
+      id: 'reports',
+      label: 'Reports',
+      icon: BarChart2,
+      route: ROUTES.ASHA_REPORTS,
+      match: (path) => path.startsWith(ROUTES.ASHA_REPORTS),
+    },
+    {
+      id: 'ai',
+      label: 'AI Insights',
+      icon: Bot,
+      route: ROUTES.ASHA_INSIGHTS,
+      match: (path) => path === ROUTES.ASHA_INSIGHTS,
+      highlight: true,
+    },
+    {
+      id: 'profile',
+      label: 'My Profile',
+      icon: User,
+      route: ROUTES.ASHA_PROFILE,
+      match: (path) => path === ROUTES.ASHA_PROFILE,
+    },
+  ] : [
+    {
+      id: 'home',
+      label: 'Dashboard',
+      icon: Home,
+      route: ROUTES.DASHBOARD,
+      match: (path) => path === ROUTES.DASHBOARD,
+    },
+    {
+      id: 'consultations',
+      label: 'Consultations',
+      icon: Video,
+      route: '/consultations-list',
+      match: (path) => path.startsWith('/consultations-list') || path.startsWith('/consultation/'),
+    },
+    {
+      id: 'prescriptions',
+      label: 'Prescriptions',
+      icon: FileText,
+      route: '/prescriptions-list',
+      match: (path) => path.startsWith('/prescriptions-list') || path.startsWith('/prescription'),
+    },
+    {
+      id: 'doctors',
+      label: 'Find a Doctor',
+      icon: Search,
+      route: ROUTES.DOCTOR_DIRECTORY,
+      match: (path) => path.startsWith('/doctors'),
+    },
+    {
+      id: 'ai',
+      label: 'AI Symptom Checker',
+      icon: Bot,
+      route: ROUTES.AI_SYMPTOM_CHECKER,
+      match: (path) => path === ROUTES.AI_SYMPTOM_CHECKER,
+      highlight: true,
+    },
+    {
+      id: 'medicines',
+      label: 'Medicines',
+      icon: Pill,
+      route: ROUTES.MEDICINES,
+      match: (path) => path === ROUTES.MEDICINES,
+    },
+    {
+      id: 'profile',
+      label: 'My Profile',
+      icon: User,
+      route: ROUTES.PROFILE,
+      match: (path) => path === ROUTES.PROFILE,
+    },
+  ]
+
+  // Pages where we might not want the sidebar even on desktop (like splash/login/role selection)
+  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION]
   if (HIDDEN_ROUTES.includes(location.pathname)) return null
   if (location.pathname.startsWith('/consultation/') && location.pathname.length > 15) return null // Hide on active video call
 

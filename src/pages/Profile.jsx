@@ -136,7 +136,11 @@ const Profile = () => {
               variant="outline" 
               fullWidth 
               size="lg" 
-              onClick={logout}
+              onClick={() => {
+                logout();
+                localStorage.removeItem('ss_role');
+                window.location.href = '/';
+              }}
               className="text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
             >
               <LogOut size={18} className="mr-2" />

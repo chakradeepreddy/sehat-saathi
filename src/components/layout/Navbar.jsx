@@ -7,30 +7,40 @@
 
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Home, Video, Bot, Menu, Search, FileText, User, X, Pill } from 'lucide-react'
+import { Home, Video, Bot, Menu, Search, FileText, User, X, Pill, Users, Activity, BarChart2 } from 'lucide-react'
 import { ROUTES } from '@/constants'
+import { useRole } from '@/context/RoleContext'
 import { Modal } from '@/components/ui' // Reusing Modal as a bottom sheet for simplicity
-
-const PRIMARY_TABS = [
-  { id: 'home', label: 'Home', icon: Home, route: ROUTES.DASHBOARD, match: (path) => path === ROUTES.DASHBOARD },
-  { id: 'consultations', label: 'Calls', icon: Video, route: '/consultations-list', match: (path) => path.startsWith('/consultations-list') },
-  { id: 'ai', label: 'AI Check', icon: Bot, route: ROUTES.AI_SYMPTOM_CHECKER, match: (path) => path === ROUTES.AI_SYMPTOM_CHECKER, highlight: true },
-]
-
-const MORE_TABS = [
-  { id: 'doctors', label: 'Find Doctor', icon: Search, route: ROUTES.DOCTOR_DIRECTORY },
-  { id: 'prescriptions', label: 'Prescriptions', icon: FileText, route: '/prescriptions-list' },
-  { id: 'medicines', label: 'Medicines', icon: Pill, route: ROUTES.MEDICINES },
-  { id: 'profile', label: 'Profile', icon: User, route: ROUTES.PROFILE },
-]
 
 const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { isAsha } = useRole()
   const [showMore, setShowMore] = useState(false)
 
-  // Hide entirely on splash, login, or active video call
-  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN]
+  const PRIMARY_TABS = isAsha ? [
+    { id: 'home', label: 'Home', icon: Home, route: ROUTES.ASHA_DASHBOARD, match: (path) => path === ROUTES.ASHA_DASHBOARD },
+    { id: 'villagers', label: 'Villagers', icon: Users, route: ROUTES.ASHA_VILLAGERS, match: (path) => path.startsWith(ROUTES.ASHA_VILLAGERS) },
+    { id: 'ai', label: 'AI Insights', icon: Bot, route: ROUTES.ASHA_INSIGHTS, match: (path) => path === ROUTES.ASHA_INSIGHTS, highlight: true },
+  ] : [
+    { id: 'home', label: 'Home', icon: Home, route: ROUTES.DASHBOARD, match: (path) => path === ROUTES.DASHBOARD },
+    { id: 'consultations', label: 'Calls', icon: Video, route: '/consultations-list', match: (path) => path.startsWith('/consultations-list') },
+    { id: 'ai', label: 'AI Check', icon: Bot, route: ROUTES.AI_SYMPTOM_CHECKER, match: (path) => path === ROUTES.AI_SYMPTOM_CHECKER, highlight: true },
+  ]
+
+  const MORE_TABS = isAsha ? [
+    { id: 'visits', label: 'Visits', icon: Activity, route: ROUTES.ASHA_VISITS },
+    { id: 'reports', label: 'Reports', icon: BarChart2, route: ROUTES.ASHA_REPORTS },
+    { id: 'profile', label: 'Profile', icon: User, route: ROUTES.ASHA_PROFILE },
+  ] : [
+    { id: 'doctors', label: 'Find Doctor', icon: Search, route: ROUTES.DOCTOR_DIRECTORY },
+    { id: 'prescriptions', label: 'Prescriptions', icon: FileText, route: '/prescriptions-list' },
+    { id: 'medicines', label: 'Medicines', icon: Pill, route: ROUTES.MEDICINES },
+    { id: 'profile', label: 'Profile', icon: User, route: ROUTES.PROFILE },
+  ]
+
+  // Hide entirely on splash, login, role selection, or active video call
+  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION]
   if (HIDDEN_ROUTES.includes(location.pathname)) return null
   if (location.pathname.startsWith('/consultation/') && location.pathname.length > 15) return null
 
