@@ -2,9 +2,11 @@
 // Router shell — each page is a route for performance
 // Placeholder pages will be replaced module by module
 
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ROUTES } from '@/constants'
 import { useApp } from '@/context/AppContext'
+import { useRole } from '@/context/RoleContext'
 import { Navbar, Sidebar } from '@/components/layout'
 import SplashScreen from '@/pages/SplashScreen'
 import RoleSelection from '@/pages/RoleSelection'
@@ -50,13 +52,32 @@ const ProtectedRoute = ({ children }) => {
   return children
 }
 
+const RootRedirect = () => {
+  const { isAuthenticated } = useApp()
+  const { role, isAsha } = useRole()
+  
+  if (isAuthenticated && role) {
+    return <Navigate to={isAsha ? ROUTES.ASHA_DASHBOARD : ROUTES.DASHBOARD} replace />
+  }
+  return <Navigate to={ROUTES.ROLE_SELECTION} replace />
+}
+
 // ── App ───────────────────────────────────────────────────────────────────────
 const App = () => {
+  const [showSplash, setShowSplash] = useState(() => !sessionStorage.getItem('ss_splash_shown'))
+
+  if (showSplash) {
+    return <SplashScreen onComplete={() => {
+      sessionStorage.setItem('ss_splash_shown', 'true')
+      setShowSplash(false)
+    }} />
+  }
+
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<RootRedirect />} />
         {/* Public routes */}
-        <Route path={ROUTES.SPLASH} element={<SplashScreen />} />
         <Route path={ROUTES.ROLE_SELECTION} element={<RoleSelection />} />
         <Route path={ROUTES.LOGIN}  element={<Login />} />
 
@@ -119,7 +140,7 @@ const App = () => {
         } />
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to={ROUTES.SPLASH} replace />} />
+        <Route path="*" element={<Navigate to={ROUTES.ROLE_SELECTION} replace />} />
       </Routes>
 
       {/* Global bottom navigation — renders on all non-excluded routes */}
