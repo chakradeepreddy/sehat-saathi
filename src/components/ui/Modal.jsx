@@ -115,7 +115,10 @@ const Modal = ({
         )}
 
         {/* Content */}
-        <div className={title || showClose ? 'px-6 pb-8' : 'p-6'}>
+        <div 
+          className={title || showClose ? 'px-6 pt-0' : 'p-6'} 
+          style={{ paddingBottom: 'calc(2rem + var(--safe-area-bottom))' }}
+        >
           {children}
         </div>
       </div>

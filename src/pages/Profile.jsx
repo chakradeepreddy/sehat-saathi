@@ -254,7 +254,7 @@ const Profile = () => {
               
               <div className="w-full text-left">
                 <label className="text-xs font-bold text-[var(--color-muted)] mb-1 block px-1">Aadhaar / Mobile Number</label>
-                <input type="text" placeholder="Enter 12-digit Aadhaar" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-brand-500 mb-4 transition-colors" />
+                <input type="text" placeholder="Enter 12-digit Aadhaar" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base font-semibold outline-none focus:border-brand-500 mb-4 transition-colors" />
               </div>
 
               <Button variant="primary" fullWidth onClick={() => setAbhaStep('otp')} className="mt-2">

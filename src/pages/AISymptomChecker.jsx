@@ -493,7 +493,7 @@ const AISymptomChecker = () => {
           <div ref={chatEndRef} />
         </div>
 
-        <div className="fixed bottom-[72px] lg:bottom-0 left-0 lg:left-64 right-0 bg-white border-t border-[var(--color-border)] p-3 z-20 flex flex-col gap-2.5 items-center">
+        <div className="fixed bottom-safe-nav lg:bottom-0 left-0 lg:left-64 right-0 bg-white border-t border-[var(--color-border)] p-3 z-20 flex flex-col gap-2.5 items-center transition-all duration-300">
           
           <div className="w-full max-w-4xl flex flex-col gap-2.5">
             

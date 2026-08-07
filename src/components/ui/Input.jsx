@@ -49,7 +49,7 @@ const Input = forwardRef(({
           aria-invalid={hasError}
           aria-describedby={hasError ? `${inputId}-error` : helper ? `${inputId}-helper` : undefined}
           className={[
-            'w-full h-12 rounded-xl border bg-white text-[var(--color-text)] text-sm',
+            'w-full h-12 rounded-xl border bg-white text-[var(--color-text)] text-base',
             'placeholder:text-[var(--color-muted)] transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400',
             leftIcon  ? 'pl-10' : 'pl-4',
@@ -120,7 +120,7 @@ export const Textarea = forwardRef(({
         rows={rows}
         aria-invalid={hasError}
         className={[
-          'w-full rounded-xl border bg-white text-[var(--color-text)] text-sm p-4',
+          'w-full rounded-xl border bg-white text-[var(--color-text)] text-base p-4',
           'placeholder:text-[var(--color-muted)] transition-all duration-200 resize-none',
           'focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400',
           hasError

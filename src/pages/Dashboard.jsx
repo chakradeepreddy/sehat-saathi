@@ -516,7 +516,7 @@ const Dashboard = () => {
       </div>
 
       {/* ── Demo Settings FAB ───────────────────────────────── */}
-      <div className="fixed bottom-24 right-4 lg:bottom-8 lg:right-8 z-50 flex flex-col gap-2">
+      <div className="fixed bottom-[calc(var(--total-bottom-offset)+1rem)] right-4 lg:bottom-8 lg:right-8 z-50 flex flex-col gap-2 transition-all duration-300">
         <button
           onClick={toggleLowBandwidthMode}
           className={`flex items-center gap-2 px-4 py-3 rounded-full shadow-lg font-bold text-xs transition-all ${isLowBandwidthMode ? 'bg-orange-500 text-white' : 'bg-white text-slate-700 border border-slate-200'}`}

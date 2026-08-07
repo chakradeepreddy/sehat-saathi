@@ -37,10 +37,10 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="fixed bottom-0 left-0 right-0 z-40 glass border-t border-white/60 safe-area-pb lg:hidden"
+        className="fixed bottom-0 left-0 right-0 z-40 glass border-t border-white/60 safe-area-pb lg:hidden h-[var(--total-bottom-offset)] flex flex-col justify-start"
         aria-label="Mobile navigation"
       >
-        <div className="flex items-center justify-around w-full">
+        <div className="flex items-center justify-around w-full h-[var(--nav-height-mobile)]">
           {PRIMARY_TABS.map(({ id, label, icon: Icon, route, match, highlight }) => {
             const isActive = match(location.pathname)
 

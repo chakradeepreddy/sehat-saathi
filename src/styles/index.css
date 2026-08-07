@@ -57,6 +57,13 @@
   --shadow-inner-btn: inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+:root {
+  /* ── Mobile Safe Areas & Layout Variables ── */
+  --nav-height-mobile: 72px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --total-bottom-offset: calc(var(--nav-height-mobile) + var(--safe-area-bottom));
+}
+
 /* ── Base Reset ── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -100,6 +107,23 @@ body {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* ── Mobile Layout Utilities ── */
+.pb-safe-nav {
+  padding-bottom: var(--total-bottom-offset);
+}
+.bottom-safe-nav {
+  bottom: var(--total-bottom-offset);
+}
+.safe-area-pb {
+  padding-bottom: var(--safe-area-bottom);
 }
 
 /* ── Utility: Gradient text ── */

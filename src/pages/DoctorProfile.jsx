@@ -291,7 +291,7 @@ const DoctorProfile = () => {
       </div>
 
       {/* ── Sticky Book Now footer ────────────────────────── */}
-      <div className="fixed bottom-0 left-0 lg:left-64 right-0 z-30 p-4 max-w-3xl mx-auto">
+      <div className="fixed bottom-safe-nav lg:bottom-0 left-0 lg:left-64 right-0 z-30 p-4 max-w-3xl mx-auto transition-all duration-300">
         <div
           className="rounded-2xl p-4 flex items-center gap-4"
           style={{

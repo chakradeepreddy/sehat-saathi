@@ -207,7 +207,7 @@ const BookAppointment = () => {
       </PageWrapper>
 
       {/* ── Bottom Action Bar ──────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 lg:left-64 right-0 p-4 z-20 bg-[var(--color-surface)] border-t border-[var(--color-border)] max-w-3xl mx-auto">
+      <div className="fixed bottom-safe-nav lg:bottom-0 left-0 lg:left-64 right-0 p-4 z-20 bg-[var(--color-surface)] border-t border-[var(--color-border)] max-w-3xl mx-auto transition-all duration-300">
         <Button
           variant="primary"
           size="lg"

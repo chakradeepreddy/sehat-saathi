@@ -155,7 +155,7 @@ const Medicines = () => {
       {/* Floating Action Button */}
       <button 
         onClick={() => setShowAddModal(true)}
-        className="fixed bottom-20 right-4 lg:bottom-8 lg:right-8 w-14 h-14 bg-brand-600 text-white rounded-full flex items-center justify-center shadow-xl shadow-brand-500/30 hover:scale-105 transition-transform z-30"
+        className="fixed bottom-[calc(var(--total-bottom-offset)+1rem)] right-4 lg:bottom-8 lg:right-8 w-14 h-14 bg-brand-600 text-white rounded-full flex items-center justify-center shadow-xl shadow-brand-500/30 hover:scale-105 transition-all duration-300 z-30"
       >
         <Plus size={24} strokeWidth={3} />
       </button>
@@ -165,17 +165,17 @@ const Medicines = () => {
         <div className="flex flex-col gap-4">
           <div>
             <label className="text-xs font-bold text-[var(--color-muted)] mb-1 block">Medicine Name</label>
-            <input type="text" placeholder="e.g. Dolo 650" value={newMed.name} onChange={(e) => setNewMed({...newMed, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-brand-500" />
+            <input type="text" placeholder="e.g. Dolo 650" value={newMed.name} onChange={(e) => setNewMed({...newMed, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base font-semibold outline-none focus:border-brand-500" />
           </div>
           
-          <div className="grid grid-cols-2 gap-3">
-            <div>
+          <div className="flex gap-4">
+            <div className="flex-1">
               <label className="text-xs font-bold text-[var(--color-muted)] mb-1 block">Dosage</label>
-              <input type="text" placeholder="e.g. 1 Tablet" value={newMed.dosage} onChange={(e) => setNewMed({...newMed, dosage: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-brand-500" />
+              <input type="text" placeholder="e.g. 1 Tablet" value={newMed.dosage} onChange={(e) => setNewMed({...newMed, dosage: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base font-semibold outline-none focus:border-brand-500" />
             </div>
-            <div>
+            <div className="flex-1">
               <label className="text-xs font-bold text-[var(--color-muted)] mb-1 block">Time</label>
-              <input type="time" value={newMed.time} onChange={(e) => setNewMed({...newMed, time: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-brand-500" />
+              <input type="time" value={newMed.time} onChange={(e) => setNewMed({...newMed, time: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base font-semibold outline-none focus:border-brand-500" />
             </div>
           </div>
 

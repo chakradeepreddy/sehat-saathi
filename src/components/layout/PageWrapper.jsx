@@ -24,7 +24,7 @@ const PageWrapper = ({
         'w-full lg:w-[calc(100%-16rem)] min-h-[100dvh] bg-[var(--color-background)] transition-all duration-300',
         'lg:ml-64', // Offset for desktop sidebar
         !noPadding ? 'p-4 lg:p-8' : '',
-        !noNavOffset ? 'pb-24 lg:pb-8' : '', // Bottom nav padding on mobile, regular on desktop
+        !noNavOffset ? 'pb-safe-nav lg:pb-8' : '', // Bottom nav padding on mobile, regular on desktop
         className,
       ].join(' ')}
     >
