@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Logo } from '@/components/ui'
 import { User, Stethoscope } from 'lucide-react'
@@ -10,6 +10,21 @@ const RoleSelection = () => {
   const navigate = useNavigate()
   const { setRole } = useRole()
   const [transitionRole, setTransitionRole] = useState(null)
+  
+  // If splash is currently playing on first load, delay our entrance
+  const [isInitialLoad] = useState(() => !sessionStorage.getItem('ss_splash_shown'))
+  const [showContent, setShowContent] = useState(!isInitialLoad)
+
+  useEffect(() => {
+    if (isInitialLoad) {
+      // Splash screen starts fading out at 2.2s.
+      // We start our entrance animation slightly after so it feels like a smooth handoff.
+      const timer = setTimeout(() => {
+        setShowContent(true)
+      }, 2400)
+      return () => clearTimeout(timer)
+    }
+  }, [isInitialLoad])
 
   const handleRoleSelect = (role) => {
     setTransitionRole(role)
@@ -56,7 +71,10 @@ const RoleSelection = () => {
         </div>
       </div>
 
-      <div className={`w-full max-w-sm text-center mb-8 relative z-10 pt-10 transition-all duration-500 ${transitionRole ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-fade-in-up'}`}>
+      <div className={`w-full max-w-sm text-center mb-8 relative z-10 pt-10 transition-all duration-700 ease-out ${
+        !showContent ? 'opacity-0 translate-y-8' : 
+        transitionRole ? 'opacity-0 scale-95' : 'opacity-100 scale-100 translate-y-0'
+      }`}>
         <div 
           className="w-20 h-20 rounded-[1.5rem] flex items-center justify-center mx-auto mb-4 shadow-2xl"
           style={{
@@ -75,7 +93,10 @@ const RoleSelection = () => {
         </p>
       </div>
 
-      <div className={`w-full max-w-md flex flex-col gap-4 relative z-10 transition-all duration-500 delay-75 ${transitionRole ? 'opacity-0 scale-95 translate-y-4' : 'opacity-100 scale-100 animate-fade-in-up translate-y-0'}`}>
+      <div className={`w-full max-w-md flex flex-col gap-4 relative z-10 transition-all duration-700 delay-100 ease-out ${
+        !showContent ? 'opacity-0 translate-y-12' : 
+        transitionRole ? 'opacity-0 scale-95 translate-y-4' : 'opacity-100 scale-100 translate-y-0'
+      }`}>
         {/* CITIZEN CARD */}
         <button 
           onClick={() => handleRoleSelect('CITIZEN')}

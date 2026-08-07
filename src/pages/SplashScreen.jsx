@@ -28,18 +28,22 @@ const SplashScreen = ({ onComplete }) => {
       setTimeout(() => setPhase(1), 600),   // Tagline after logo
       setTimeout(() => setPhase(2), 1200),  // Features appear
       setTimeout(() => setPhase(3), 2000),  // Start exit
+      setTimeout(() => setPhase(4), 2200),  // Start background exit
       setTimeout(() => {
         if (onComplete) onComplete()
-      }, 2500),
+      }, 3000),
     ]
     return () => timers.forEach(t => clearTimeout(t))
   }, [onComplete])
 
   return (
     <div
-      className="fixed inset-0 flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 flex flex-col items-center justify-center overflow-hidden z-[100]"
       style={{
         background: 'radial-gradient(circle at 50% 30%, #0369a1 0%, #0c4a6e 40%, #082f49 100%)',
+        opacity: phase >= 4 ? 0 : 1,
+        pointerEvents: phase >= 4 ? 'none' : 'auto',
+        transition: 'opacity 0.8s ease-in-out',
       }}
     >
       {/* Decorative background orbs — deep and calm */}
