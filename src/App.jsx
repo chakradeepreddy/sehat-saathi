@@ -31,19 +31,13 @@ import AshaVisits from '@/pages/asha/Visits'
 import AshaReports from '@/pages/asha/Reports'
 import AshaProfile from '@/pages/asha/AshaProfile'
 
-// Pages — will be replaced with real implementations
-const PlaceholderPage = ({ name }) => (
-  <PageWrapper className="flex items-center justify-center min-h-[80vh]">
-    <div className="text-center">
-      <div className="w-16 h-16 bg-brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-        <span className="text-white font-display font-bold text-xl">SS</span>
-      </div>
-      <h1 className="text-2xl font-display font-bold text-brand-700 mb-2">Sehat Saathi</h1>
-      <p className="text-brand-500 font-medium">{name}</p>
-      <p className="text-[var(--color-muted)] text-sm mt-1">Module coming soon...</p>
-    </div>
-  </PageWrapper>
-)
+// Doctor Pages
+import DoctorLogin from '@/pages/doctor/DoctorLogin'
+import DoctorRegister from '@/pages/doctor/DoctorRegister'
+import DoctorDashboard from '@/pages/doctor/DoctorDashboard'
+import DoctorProfileManage from '@/pages/doctor/DoctorProfileManage'
+
+
 
 // ── Protected Route ───────────────────────────────────────────────────────────
 const ProtectedRoute = ({ children }) => {
@@ -54,10 +48,12 @@ const ProtectedRoute = ({ children }) => {
 
 const RootRedirect = () => {
   const { isAuthenticated } = useApp()
-  const { role, isAsha } = useRole()
+  const { role, isAsha, isDoctor } = useRole()
   
   if (isAuthenticated && role) {
-    return <Navigate to={isAsha ? ROUTES.ASHA_DASHBOARD : ROUTES.DASHBOARD} replace />
+    if (isDoctor) return <Navigate to={ROUTES.DOCTOR_DASHBOARD} replace />
+    if (isAsha) return <Navigate to={ROUTES.ASHA_DASHBOARD} replace />
+    return <Navigate to={ROUTES.DASHBOARD} replace />
   }
   return <Navigate to={ROUTES.ROLE_SELECTION} replace />
 }
@@ -80,6 +76,8 @@ const App = () => {
         {/* Public routes */}
         <Route path={ROUTES.ROLE_SELECTION} element={<RoleSelection />} />
         <Route path={ROUTES.LOGIN}  element={<Login />} />
+        <Route path={ROUTES.DOCTOR_LOGIN} element={<DoctorLogin />} />
+        <Route path={ROUTES.DOCTOR_REGISTER} element={<DoctorRegister />} />
 
         {/* Protected routes */}
         <Route path={ROUTES.DASHBOARD} element={
@@ -137,6 +135,14 @@ const App = () => {
         } />
         <Route path={ROUTES.ASHA_PROFILE} element={
           <ProtectedRoute><AshaProfile /></ProtectedRoute>
+        } />
+
+        {/* Doctor Protected routes */}
+        <Route path={ROUTES.DOCTOR_DASHBOARD} element={
+          <ProtectedRoute><DoctorDashboard /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.DOCTOR_PROFILE_MANAGE} element={
+          <ProtectedRoute><DoctorProfileManage /></ProtectedRoute>
         } />
 
         {/* Fallback */}

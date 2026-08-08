@@ -3,7 +3,7 @@
 // Using Context + useReducer pattern for predictable state management
 // Deliberately lightweight — no Redux overhead for a prototype
 
-import { createContext, useContext, useReducer, useCallback } from 'react'
+import { createContext, useContext, useReducer, useCallback, useEffect } from 'react'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { useTranslation } from '@/utils/translations'
 import appointmentsData from '@/data/appointments.json'
