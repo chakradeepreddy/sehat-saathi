@@ -9,7 +9,7 @@ export const RoleProvider = ({ children }) => {
     try {
       const stored = localStorage.getItem('ss_role')
       // Only return valid roles
-      if (stored === 'CITIZEN' || stored === 'ASHA') return stored
+      if (stored === 'CITIZEN' || stored === 'ASHA' || stored === 'DOCTOR') return stored
     } catch (error) {
       console.warn('Could not read role from localStorage', error)
     }
@@ -26,16 +26,17 @@ export const RoleProvider = ({ children }) => {
   }, [role])
 
   const setRole = (newRole) => {
-    if (newRole === 'CITIZEN' || newRole === 'ASHA' || newRole === null) {
+    if (newRole === 'CITIZEN' || newRole === 'ASHA' || newRole === 'DOCTOR' || newRole === null) {
       setRoleState(newRole)
     }
   }
 
   const isCitizen = role === 'CITIZEN'
   const isAsha = role === 'ASHA'
+  const isDoctor = role === 'DOCTOR'
 
   return (
-    <RoleContext.Provider value={{ role, setRole, isCitizen, isAsha }}>
+    <RoleContext.Provider value={{ role, setRole, isCitizen, isAsha, isDoctor }}>
       {children}
     </RoleContext.Provider>
   )

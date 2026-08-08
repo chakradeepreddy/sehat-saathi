@@ -56,6 +56,8 @@ const reducer = (state, action) => {
       return { ...state, user: action.payload, activeProfile: action.payload, isAuthenticated: true }
     case 'LOGOUT':
       return { ...state, user: null, activeProfile: null, isAuthenticated: false }
+    case 'REGISTER_DOCTOR':
+      return { ...state, registeredDoctors: [...state.registeredDoctors, action.payload] }
     case 'ADD_APPOINTMENT':
       return { ...state, appointments: [action.payload, ...state.appointments] }
     case 'SET_LANGUAGE':
@@ -96,20 +98,28 @@ export const AppProvider = ({ children }) => {
     isAuthenticated: false,
     user: null,
   })
+  
+  const [persistedAppointments, setPersistedAppointments] = useLocalStorage('ss_appointments', appointmentsData)
+  const [persistedRegisteredDoctors, setPersistedRegisteredDoctors] = useLocalStorage('ss_registered_doctors', [])
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     isAuthenticated: persistedAuth.isAuthenticated,
     user: persistedAuth.user || DEFAULT_USER,
     activeProfile: persistedAuth.user || DEFAULT_USER,
-    appointments: appointmentsData,
+    appointments: persistedAppointments,
     language: persistedAuth.language || 'en',
+    registeredDoctors: persistedRegisteredDoctors
   })
 
-  // We persist language in local storage as well for convenience
-  const setPersistedLang = (lang) => {
-    setPersistedAuth(prev => ({ ...prev, language: lang }))
-  }
+  // Side-effect: Persist state changes
+  useEffect(() => {
+    setPersistedAppointments(state.appointments)
+  }, [state.appointments, setPersistedAppointments])
+  
+  useEffect(() => {
+    setPersistedRegisteredDoctors(state.registeredDoctors)
+  }, [state.registeredDoctors, setPersistedRegisteredDoctors])
 
   const login = useCallback((userData = DEFAULT_USER) => {
     dispatch({ type: 'LOGIN', payload: userData })
@@ -127,8 +137,12 @@ export const AppProvider = ({ children }) => {
 
   const setLanguage = useCallback((lang) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang })
-    setPersistedLang(lang)
+    setPersistedAuth(prev => ({ ...prev, language: lang }))
   }, [setPersistedAuth])
+  
+  const registerDoctor = useCallback((doctorData) => {
+    dispatch({ type: 'REGISTER_DOCTOR', payload: doctorData })
+  }, [])
 
   const toggleAshaMode = () => dispatch({ type: 'TOGGLE_ASHA_MODE' })
   const toggleLowBandwidthMode = () => dispatch({ type: 'TOGGLE_LOW_BANDWIDTH_MODE' })
@@ -153,6 +167,7 @@ export const AppProvider = ({ children }) => {
       addMedicine,
       removeMedicine,
       toggleMedicineStatus,
+      registerDoctor,
       t 
     }}>
       {children}

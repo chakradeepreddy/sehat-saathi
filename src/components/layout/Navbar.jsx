@@ -15,10 +15,13 @@ import { Modal } from '@/components/ui' // Reusing Modal as a bottom sheet for s
 const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { isAsha } = useRole()
+  const { isAsha, isDoctor } = useRole()
   const [showMore, setShowMore] = useState(false)
 
-  const PRIMARY_TABS = isAsha ? [
+  const PRIMARY_TABS = isDoctor ? [
+    { id: 'home', label: 'Home', icon: Home, route: ROUTES.DOCTOR_DASHBOARD, match: (path) => path === ROUTES.DOCTOR_DASHBOARD },
+    { id: 'profile', label: 'Profile', icon: User, route: ROUTES.DOCTOR_PROFILE_MANAGE, match: (path) => path === ROUTES.DOCTOR_PROFILE_MANAGE },
+  ] : isAsha ? [
     { id: 'home', label: 'Home', icon: Home, route: ROUTES.ASHA_DASHBOARD, match: (path) => path === ROUTES.ASHA_DASHBOARD },
     { id: 'villagers', label: 'Villagers', icon: Users, route: ROUTES.ASHA_VILLAGERS, match: (path) => path.startsWith(ROUTES.ASHA_VILLAGERS) },
     { id: 'ai', label: 'AI Insights', icon: Bot, route: ROUTES.ASHA_INSIGHTS, match: (path) => path === ROUTES.ASHA_INSIGHTS, highlight: true },
@@ -28,7 +31,9 @@ const Navbar = () => {
     { id: 'ai', label: 'AI Check', icon: Bot, route: ROUTES.AI_SYMPTOM_CHECKER, match: (path) => path === ROUTES.AI_SYMPTOM_CHECKER, highlight: true },
   ]
 
-  const MORE_TABS = isAsha ? [
+  const MORE_TABS = isDoctor ? [
+    { id: 'settings', label: 'Settings', icon: User, route: ROUTES.DOCTOR_PROFILE_MANAGE },
+  ] : isAsha ? [
     { id: 'visits', label: 'Visits', icon: Activity, route: ROUTES.ASHA_VISITS },
     { id: 'reports', label: 'Reports', icon: BarChart2, route: ROUTES.ASHA_REPORTS },
     { id: 'profile', label: 'Profile', icon: User, route: ROUTES.ASHA_PROFILE },
@@ -40,7 +45,7 @@ const Navbar = () => {
   ]
 
   // Hide entirely on splash, login, role selection, or active video call
-  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION]
+  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION, ROUTES.DOCTOR_LOGIN, ROUTES.DOCTOR_REGISTER]
   if (HIDDEN_ROUTES.includes(location.pathname)) return null
   if (location.pathname.startsWith('/consultation/') && location.pathname.length > 15) return null
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Logo } from '@/components/ui'
-import { User, Stethoscope } from 'lucide-react'
+import { User, Stethoscope, Activity } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { ROUTES } from '@/constants'
 import { useRole } from '@/context/RoleContext'
@@ -30,7 +30,11 @@ const RoleSelection = () => {
     setTransitionRole(role)
     setTimeout(() => {
       setRole(role)
-      navigate(ROUTES.LOGIN)
+      if (role === 'DOCTOR') {
+        navigate(ROUTES.DOCTOR_LOGIN)
+      } else {
+        navigate(ROUTES.LOGIN)
+      }
     }, 1200) // 1.2s to allow for fade out, logo display, and fade in
   }
 
@@ -66,7 +70,9 @@ const RoleSelection = () => {
             <Logo size="xl" variant="white" showText={false} iconOnly />
           </div>
           <p className="text-white font-display font-medium text-lg tracking-wide text-center px-6">
-            {transitionRole === 'CITIZEN' ? 'Preparing your Citizen Workspace...' : 'Loading ASHA Operations Dashboard...'}
+            {transitionRole === 'CITIZEN' ? 'Preparing your Citizen Workspace...' : 
+             transitionRole === 'DOCTOR' ? 'Loading Doctor Portal...' : 
+             'Loading ASHA Operations Dashboard...'}
           </p>
         </div>
       </div>
@@ -140,6 +146,31 @@ const RoleSelection = () => {
                 </p>
                 <div className="inline-flex items-center text-sm font-bold text-purple-600 group-hover:text-purple-700">
                   Continue as ASHA Worker
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </button>
+
+        {/* DOCTOR CARD */}
+        <button 
+          onClick={() => handleRoleSelect('DOCTOR')}
+          className="group relative w-full text-left"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+          <Card className="relative p-6 border-2 border-transparent group-hover:border-teal-500 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-2xl bg-white/90 backdrop-blur-xl">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center shrink-0 group-hover:bg-teal-500 transition-colors duration-300">
+                <Activity size={28} className="text-teal-600 group-hover:text-white transition-colors duration-300" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-slate-800 mb-1">Doctor</h3>
+                <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                  Manage your appointments, set availability, and offer remote consultations.
+                </p>
+                <div className="inline-flex items-center text-sm font-bold text-teal-600 group-hover:text-teal-700">
+                  Continue as Doctor
                   <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </div>

@@ -20,12 +20,15 @@ import { TopBar, PageWrapper } from '@/components/layout'
 import { DoctorCard }          from '@/components/shared'
 import { Badge, EmptyState }   from '@/components/ui'
 import { Skeleton }            from '@/components/ui'
+import { useApp }              from '@/context/AppContext'
+import { calculateDistance, LOCATIONS } from '@/utils/location'
 import doctorsData             from '@/data/doctors.json'
 
 // All unique specializations from data
 const ALL_SPECS = ['All', ...new Set(doctorsData.map((d) => d.specialization))]
 
 const SORT_OPTIONS = [
+  { value: 'distance',   label: 'Nearest First' },
   { value: 'rating',     label: 'Top Rated' },
   { value: 'fee_asc',   label: 'Fee: Low to High' },
   { value: 'fee_desc',  label: 'Fee: High to Low' },
@@ -34,23 +37,53 @@ const SORT_OPTIONS = [
 
 const DoctorDirectory = () => {
   const navigate = useNavigate()
+  const { registeredDoctors } = useApp()
   const [query,        setQuery]       = useState('')
   const [activeSpec,   setActiveSpec]  = useState('All')
   const [availOnly,    setAvailOnly]   = useState(false)
   const [genderFilter, setGenderFilter]= useState('All')
   const [consultType,  setConsultType] = useState('All')
-  const [sort,         setSort]        = useState('rating')
+  const [sort,         setSort]        = useState('distance')
   const [showSort,     setShowSort]    = useState(false)
   const [isLoading,    setIsLoading]   = useState(true)
+  const [userLocation, setUserLocation]= useState(null)
+  
+  // Combine static and dynamically registered doctors
+  const allDoctors = useMemo(() => {
+    return [...doctorsData, ...registeredDoctors]
+  }, [registeredDoctors])
 
   useEffect(() => {
-    // Simulate premium network loading
-    const timer = setTimeout(() => setIsLoading(false), 800)
-    return () => clearTimeout(timer)
+    // Attempt geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({ lat: position.coords.latitude, lon: position.coords.longitude })
+          setIsLoading(false)
+        },
+        () => {
+          // Fallback to Nabha on permission denial
+          setUserLocation({ lat: LOCATIONS.NABHA.lat, lon: LOCATIONS.NABHA.lon })
+          setIsLoading(false)
+        }
+      )
+    } else {
+      setUserLocation({ lat: LOCATIONS.NABHA.lat, lon: LOCATIONS.NABHA.lon })
+      setIsLoading(false)
+    }
   }, [])
 
   const filtered = useMemo(() => {
-    let list = [...doctorsData]
+    if (!userLocation) return [] // Wait for location
+    
+    // Filter out hidden doctors first
+    let list = allDoctors.filter(d => d.isVisible !== false)
+
+    // Calculate distances
+    list = list.map(d => ({
+      ...d,
+      distanceKm: calculateDistance(userLocation.lat, userLocation.lon, d.latitude, d.longitude)
+    }))
 
     // Search — name OR specialization
     if (query.trim()) {
@@ -85,6 +118,13 @@ const DoctorDirectory = () => {
 
     // Sort
     switch (sort) {
+      case 'distance':
+        list.sort((a, b) => {
+          if (a.distanceKm === null) return 1
+          if (b.distanceKm === null) return -1
+          return a.distanceKm - b.distanceKm
+        })
+        break
       case 'rating':
         list.sort((a, b) => b.rating - a.rating)
         break
@@ -102,18 +142,18 @@ const DoctorDirectory = () => {
     }
 
     return list
-  }, [query, activeSpec, availOnly, sort])
+  }, [query, activeSpec, availOnly, sort, genderFilter, consultType, allDoctors, userLocation])
 
   const clearFilters = () => {
     setQuery('')
     setActiveSpec('All')
     setAvailOnly(false)
-    setSort('rating')
+    setSort('distance')
     setGenderFilter('All')
     setConsultType('All')
   }
 
-  const hasActiveFilters = query || activeSpec !== 'All' || availOnly || sort !== 'rating' || genderFilter !== 'All' || consultType !== 'All'
+  const hasActiveFilters = query || activeSpec !== 'All' || availOnly || sort !== 'distance' || genderFilter !== 'All' || consultType !== 'All'
 
   return (
     <>

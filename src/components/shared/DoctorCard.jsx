@@ -5,7 +5,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useNavigate } from 'react-router-dom'
-import { Star, Clock, Languages, Video, BadgeCheck, Building2, ThumbsUp, Users } from 'lucide-react'
+import { Star, Clock, Languages, Video, BadgeCheck, Building2, ThumbsUp, Users, MapPin } from 'lucide-react'
 import { Card, Badge, Avatar, Button } from '@/components/ui'
 
 /**
@@ -49,6 +49,12 @@ const DoctorCard = ({ doctor, mode = 'full', className = '' }) => {
             <p className="text-xs text-[var(--color-text-soft)] mt-0.5 line-clamp-1">
               {doctor.specialization}
             </p>
+            {doctor.distanceKm !== undefined && (
+              <div className="flex items-center justify-center gap-1 mt-1 text-[10px] text-[var(--color-muted)] font-medium">
+                <MapPin size={10} />
+                {doctor.distanceKm.toFixed(1)} km
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-1">
             <Star size={12} className="text-yellow-400 fill-yellow-400" />
@@ -100,6 +106,12 @@ const DoctorCard = ({ doctor, mode = 'full', className = '' }) => {
                 <div className="flex items-center gap-1 mt-1 text-xs text-[var(--color-text-soft)] font-medium">
                   <Building2 size={12} className="text-slate-400" />
                   {doctor.clinic}
+                </div>
+              )}
+              {doctor.distanceKm !== undefined && (
+                <div className="flex items-center gap-1 mt-1 text-xs text-[var(--color-muted)] font-medium">
+                  <MapPin size={12} className="text-brand-400" />
+                  {doctor.distanceKm.toFixed(1)} km away
                 </div>
               )}
             </div>

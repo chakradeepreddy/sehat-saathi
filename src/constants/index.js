@@ -29,6 +29,12 @@ export const ROUTES = {
   ASHA_REPORTS:        '/asha/reports',
   ASHA_INSIGHTS:       '/asha/insights',
   ASHA_PROFILE:        '/asha/profile',
+
+  // Doctor Routes
+  DOCTOR_LOGIN:        '/doctor/login',
+  DOCTOR_REGISTER:     '/doctor/register',
+  DOCTOR_DASHBOARD:    '/doctor/dashboard',
+  DOCTOR_PROFILE_MANAGE:'/doctor/profile-manage',
 }
 
 export const APP_NAME = 'Sehat Saathi'

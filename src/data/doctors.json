@@ -17,10 +17,13 @@
     "nextSlot": "Today, 11:00 AM",
     "clinic": "Nabha Civil Hospital",
     "location": "Nabha, Punjab",
+    "latitude": 30.3752,
+    "longitude": 76.1481,
     "about": "Dr. Harpreet Singh is a dedicated General Physician with over 12 years of experience serving rural communities in Punjab. He specializes in managing chronic diseases like diabetes and hypertension, which are prevalent in the Nabha region.",
     "expertise": ["Diabetes Management", "Hypertension", "Fever & Infections", "Preventive Health"],
     "consultationTypes": ["video", "audio", "chat"],
-    "gender": "male"
+    "gender": "male",
+    "isVisible": true
   },
   {
     "id": "d002",
@@ -40,10 +43,13 @@
     "nextSlot": "Today, 02:00 PM",
     "clinic": "Nabha Women & Child Clinic",
     "location": "Nabha, Punjab",
+    "latitude": 30.3752,
+    "longitude": 76.1481,
     "about": "Dr. Priya Sharma is a highly experienced Gynecologist committed to maternal and child health in rural Punjab. She has delivered over 1,200 babies and runs free maternal health camps in surrounding villages.",
     "expertise": ["Prenatal Care", "Normal & High-Risk Delivery", "PCOS", "Women Wellness"],
     "consultationTypes": ["video", "audio"],
-    "gender": "female"
+    "gender": "female",
+    "isVisible": true
   },
   {
     "id": "d003",
@@ -62,11 +68,14 @@
     "available": true,
     "nextSlot": "Tomorrow, 10:00 AM",
     "clinic": "Nabha Child Care Centre",
-    "location": "Nabha, Punjab",
-    "about": "Dr. Gurjeet Kaur has dedicated her career to improving child health outcomes in rural Punjab. She is passionate about vaccination drives and nutrition education for mothers in villages around Nabha.",
-    "expertise": ["Child Vaccinations", "Nutrition", "Respiratory Infections", "Developmental Delays"],
+    "location": "Patiala, Punjab",
+    "latitude": 30.3398,
+    "longitude": 76.3869,
+    "about": "Dr. Gurjeet Kaur is a pediatrician specializing in infant and child care. She believes in holistic development and provides extensive counseling to parents regarding child nutrition.",
+    "expertise": ["Vaccination", "Child Nutrition", "Growth Monitoring", "Fever & Infections"],
     "consultationTypes": ["video", "audio", "chat"],
-    "gender": "female"
+    "gender": "female",
+    "isVisible": true
   },
   {
     "id": "d004",
@@ -85,11 +94,14 @@
     "available": false,
     "nextSlot": "Tomorrow, 03:00 PM",
     "clinic": "Nabha Bone & Joint Clinic",
-    "location": "Nabha, Punjab",
-    "about": "Dr. Rajesh Kumar is a senior Orthopedic surgeon with 15 years of experience. He has helped hundreds of farmers and laborers in the region recover from occupational injuries and joint problems.",
-    "expertise": ["Joint Replacement", "Sports Injuries", "Fractures", "Back Pain"],
-    "consultationTypes": ["video", "audio"],
-    "gender": "male"
+    "location": "Rajpura, Punjab",
+    "latitude": 30.4851,
+    "longitude": 76.5928,
+    "about": "Dr. Rajesh Kumar is a senior cardiologist with a special interest in preventive cardiology. He frequently conducts heart health awareness programs in rural areas.",
+    "expertise": ["Hypertension", "Heart Failure", "Cholesterol Management", "ECG Analysis"],
+    "consultationTypes": ["video"],
+    "gender": "male",
+    "isVisible": true
   },
   {
     "id": "d005",
@@ -108,11 +120,14 @@
     "available": true,
     "nextSlot": "Today, 04:30 PM",
     "clinic": "Nabha Skin Care Clinic",
-    "location": "Nabha, Punjab",
-    "about": "Dr. Sunita Devi specializes in skin conditions common in agricultural communities, including sun damage, fungal infections, and pesticide-related skin issues. She is committed to affordable dermatology care.",
-    "expertise": ["Fungal Infections", "Eczema", "Skin Allergies", "Sun Damage"],
+    "location": "Sangrur, Punjab",
+    "latitude": 30.2458,
+    "longitude": 75.8436,
+    "about": "Dr. Anita Desai specializes in treating various skin conditions and promoting skin health. She is an expert in diagnosing skin infections common in agricultural communities.",
+    "expertise": ["Acne", "Skin Infections", "Eczema", "Hair Fall"],
     "consultationTypes": ["video", "chat"],
-    "gender": "female"
+    "gender": "female",
+    "isVisible": true
   },
   {
     "id": "d006",

@@ -81,11 +81,11 @@ const MEDICINES = [
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 const Dashboard = () => {
   const navigate = useNavigate()
-  const { user, activeProfile, appointments, t, isAshaMode, isLowBandwidthMode, toggleAshaMode, toggleLowBandwidthMode, setActiveProfile } = useApp()
+  const { user, activeProfile, appointments, t, isAshaMode, isLowBandwidthMode, toggleAshaMode, toggleLowBandwidthMode, setActiveProfile, registeredDoctors } = useApp()
   const [showOfflineToast, setShowOfflineToast] = useState(true)
 
   const upcomingAppointment  = appointments.find((a) => a.status === 'upcoming')
-  const availableDoctors     = doctorsData.filter((d) => d.available).slice(0, 5)
+  const availableDoctors     = [...doctorsData, ...(registeredDoctors || [])].filter((d) => d.available && d.isVisible !== false).slice(0, 5)
   const nearbyPHCs           = phcsData.slice(0, 3)
   const recentPrescription   = prescriptions[0]
   const hour = new Date().getHours()

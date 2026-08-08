@@ -23,7 +23,24 @@ const Sidebar = () => {
     navigate(ROUTES.ROLE_SELECTION, { replace: true })
   }
 
-  const SIDEBAR_ITEMS = isAsha ? [
+  const { isDoctor } = useRole()
+
+  const SIDEBAR_ITEMS = isDoctor ? [
+    {
+      id: 'home',
+      label: 'Dashboard',
+      icon: Home,
+      route: ROUTES.DOCTOR_DASHBOARD,
+      match: (path) => path === ROUTES.DOCTOR_DASHBOARD,
+    },
+    {
+      id: 'profile',
+      label: 'My Profile',
+      icon: User,
+      route: ROUTES.DOCTOR_PROFILE_MANAGE,
+      match: (path) => path === ROUTES.DOCTOR_PROFILE_MANAGE,
+    },
+  ] : isAsha ? [
     {
       id: 'home',
       label: 'Dashboard',
@@ -120,8 +137,8 @@ const Sidebar = () => {
     },
   ]
 
-  // Pages where we might not want the sidebar even on desktop (like splash/login/role selection)
-  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION]
+  // Hide sidebar entirely on auth / role selection
+  const HIDDEN_ROUTES = [ROUTES.SPLASH, ROUTES.LOGIN, ROUTES.ROLE_SELECTION, ROUTES.DOCTOR_LOGIN, ROUTES.DOCTOR_REGISTER]
   if (HIDDEN_ROUTES.includes(location.pathname)) return null
   if (location.pathname.startsWith('/consultation/') && location.pathname.length > 15) return null // Hide on active video call
 
